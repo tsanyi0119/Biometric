@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createBiometricPrompt(){
+        //設置驗證CallBack
         biometricPrompt = new BiometricPrompt(this,
                 ContextCompat.getMainExecutor(this),
                 new AuthenticationCallback() {
@@ -100,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void checkBiometricSupport(){
+        //確認是否有生物辨識功能(BIOMETRIC_STRONG、BIOMETRIC_WEAK、DEVICE_CREDENTIAL)
         switch (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG)) {
             case BiometricManager.BIOMETRIC_SUCCESS:
                 Log.e("TAG", "App can authenticate using biometrics.");
@@ -115,16 +117,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + biometricManager.canAuthenticate());
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 0){
-            if (resultCode == RESULT_OK) {
-
-            }
         }
     }
 }
